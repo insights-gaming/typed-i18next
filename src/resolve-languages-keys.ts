@@ -37,7 +37,9 @@ export async function resolveLanguageTranslations(language: string, location: st
     const translationsFilesAbsolute = await getListFilesRecursively(location);
 
     // Convert paths from absolute to relative (Unix style).
-    const translationsFiles = translationsFilesAbsolute.map(x => path.toUnix(path.relative(location, x)));
+    const translationsFiles = translationsFilesAbsolute
+        .map(x => path.toUnix(path.relative(location, x)))
+        .filter(fileName => /.json$/i.test(fileName));
 
     // Gather promises for translation keys.
     const translationKeysPromises = translationsFiles.map(fileName => extractTranslationsFromFile(fileName, location));
