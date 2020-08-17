@@ -15,7 +15,7 @@ function resolveTypes(namespaceDictionary: { [key: string]: string[] }, keyWithN
             keyPrefix = "";
         }
 
-        result[`"${ns}"`] = keys.map(key => `"${keyPrefix}${key}"`).join(" | ");
+        result[`"${ns}"`] = `\n| ${keys.map(key => `"${keyPrefix}${key}"`).join("\n| ")}\n`;
     }
 
     return result;
